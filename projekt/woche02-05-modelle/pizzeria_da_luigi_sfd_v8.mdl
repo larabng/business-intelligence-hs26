@@ -1,0 +1,394 @@
+{UTF-8}
+Offene Bestellungen= INTEG (
+	angenommene Bestellungen-Zubereitung gestartet,
+		0)
+	~	Bestellungen
+	~	STOCK (Warteschlange). Angenommene Bestellungen, mit deren Zubereitung noch \
+		niemand begonnen hat.
+	|
+
+Bestellungen in Zubereitung= INTEG (
+	Zubereitung gestartet-fertige Bestellungen,
+		0)
+	~	Bestellungen
+	~	STOCK. Belegt oder im Ofen. Materielle Verzögerung: Abfluss = Bestand / Backzeit.
+	|
+
+Verlorene Bestellungen= INTEG (
+	abgelehnte Bestellungen,
+		0)
+	~	Bestellungen
+	~	STOCK. Kumuliert abgelehnte Nachfrage des Abends.
+	|
+
+angenommene Bestellungen=
+	Nachfrage-abgelehnte Bestellungen
+	~	Bestellungen/Stunde
+	~	INFLOW.
+	|
+
+abgelehnte Bestellungen=
+	Nachfrage*Ablehnungsanteil
+	~	Bestellungen/Stunde
+	~	FLOW in Verlorene Bestellungen.
+	|
+
+Ablehnungsanteil=
+	MIN(1, MAX(0, (wahrgenommene Durchlaufzeit-Schwelle Durchlaufzeit)/Toleranzband))
+	~	Dmnl
+	~	ENTSCHEIDUNGSREGEL des Küchenchefs, in Minuten statt Auslastung. Default = \
+		exakte Übersetzung der Teamregel 1.5 / 2.5 aus v3 (22.5 bis 37.5 Minuten).
+	|
+
+Schwelle Durchlaufzeit=
+	22.5
+	~	Minuten
+	~	HEBELPUNKT. Ab dieser wahrgenommenen Durchlaufzeit beginnt die Ablehnung. \
+		Lieferzusage 45 Min. (Charter v1) minus ca. 10 Min. Lieferweg = 35 Min. \
+		Kuechenbudget. Ohne Stau dauert eine Bestellung 20 Min.; ab 22.5 Min. \
+		bildet sich eine Schlange, ab 37.5 Min. ist die Zusage nicht haltbar.
+	|
+
+Toleranzband=
+	15
+	~	Minuten
+	~	Spanne von erster bis vollständiger Ablehnung. Aus Teamregel 2.5 abgeleitet.
+	|
+
+Zubereitung gestartet=
+	MIN(Offene Bestellungen/Vorbereitungszeit, MIN(Personalkapazität, fertige Bestellungen+freie Ofenplätze/Vorbereitungszeit))
+	~	Bestellungen/Stunde
+	~	FLOW. Begrenzt durch Personal (Engpass 1) und freie Ofenplätze (Engpass 2).
+	|
+
+fertige Bestellungen=
+	Bestellungen in Zubereitung/Backzeit
+	~	Bestellungen/Stunde
+	~	OUTFLOW. Materielle Verzögerung 1. Ordnung mit der Backzeit.
+	|
+
+Vorbereitungszeit=
+	1/Leistung pro Person
+	~	Stunde
+	~	VERZÖGERUNG. Abgeleitet: 12 Bestellungen pro Person und Stunde = 5 Minuten.
+	|
+
+Personalkapazität=
+	Personal im Einsatz*Leistung pro Person
+	~	Bestellungen/Stunde
+	~	Kapazität des Engpasses Personal.
+	|
+
+freie Ofenplätze=
+	MAX(0, Ofenplätze-Bestellungen in Zubereitung)
+	~	Bestellungen
+	~	Freie Plätze im Ofen.
+	|
+
+Ofenkapazität=
+	Ofenplätze/Backzeit
+	~	Bestellungen/Stunde
+	~	Durchsatz des Ofens.
+	|
+
+Kapazität der Küche=
+	MIN(Ofenkapazität, Personalkapazität)
+	~	Bestellungen/Stunde
+	~	Engpass = der kleinere Wert.
+	|
+
+Auslastung Personal=
+	ZIDZ(Zubereitung gestartet, Personalkapazität)
+	~	Dmnl
+	~	KPI 0..1. Echte Auslastung des Personals.
+	|
+
+Auslastung Ofen=
+	ZIDZ(Bestellungen in Zubereitung, Ofenplätze)
+	~	Dmnl
+	~	KPI 0..1. Belegung des Ofens.
+	|
+
+Erwartete Durchlaufzeit=
+	(Wartezeit in Schlange+Backzeit)*Minuten je Stunde
+	~	Minuten
+	~	KPI. Little's Law: Zeit in der Schlange (inkl. Vorbereitung) plus Backen. \
+		v8: Vorbereitungszeit nicht mehr separat addiert, weil sie bereits im \
+		Abfluss der Schlange steckt (sonst doppelt gezaehlt: 25 statt 20 Minuten).
+	|
+
+Wartezeit in Schlange=
+	IF THEN ELSE(Offene Bestellungen<0.001, 0, XIDZ(Offene Bestellungen, Zubereitung gestartet, 99))
+	~	Stunde
+	~	Little's Law: Offene Bestellungen / Zubereitung gestartet. Enthaelt die \
+		Vorbereitungszeit (5 Min.) plus echtes Warten. 99 Stunden, wenn nichts \
+		mehr gestartet wird (z.B. kein Personal).
+	|
+
+wahrgenommene Durchlaufzeit=
+	SMOOTH(Erwartete Durchlaufzeit, Wahrnehmungsverzögerung)
+	~	Minuten
+	~	INFORMATIONSVERZÖGERUNG. Der Küchenchef sieht den Stau erst verzögert.
+	|
+
+Wahrnehmungsverzögerung=
+	0.015625
+	~	Stunde
+	~	OFFEN. Default = 1 Zeitschritt (praktisch sofort, wie Modell v3). In der \
+		Sensitivität 5 bis 30 Minuten getestet.
+	|
+
+Minuten je Stunde=
+	60
+	~	Minuten/Stunde
+	~	|
+
+Backzeit=
+	0.25
+	~	Stunde
+	~	VERZÖGERUNG. Teamwert v3. OFFEN: reine Ofenzeit oder ganze Durchlaufzeit?
+	|
+
+Leistung pro Person=
+	12
+	~	Bestellungen/(Stunde*Personen)
+	~	Teamwert v3. OFFEN: aus Kassendaten messen.
+	|
+
+Ofenplätze=
+	10
+	~	Bestellungen
+	~	Abgeleitet aus Teamwerten: 40 pro Stunde x 0.25 Stunden. OFFEN: echte Anzahl.
+	|
+
+Personal im Einsatz=
+	Basispersonal Kueche+Feedforward Schalter*IF THEN ELSE(Erwartete Nachfrage Prognose>Basispersonal Kueche*Leistung pro Person, Zusatzpersonal, 0)
+	~	Personen
+	~	FEEDFORWARD. Personen in der Kueche. Liegt die Prognose ueber der Kapazitaet \
+		des Basispersonals, wird vorab (bis Mittwoch, Antwortkarte 2) eine \
+		Aushilfe zusaetzlich eingeplant.
+	|
+
+Basispersonal Kueche=
+	2
+	~	Personen
+	~	Aus System Charter v1: abends 2 Personen in der Kueche. Der Service macht \
+		keine Pizzen.
+	|
+
+Zusatzpersonal=
+	1
+	~	Personen
+	~	Eine zusaetzliche Aushilfe am Wochenende.
+	|
+
+Feedforward Schalter=
+	0
+	~	Dmnl [0,1,1]
+	~	0 = heute (keine Vorsteuerung), 1 = Einsatzplan nach Prognose. Wie im \
+		Baeckerei-Beispiel fuer den Vergleich mit/ohne Feedforward.
+	|
+
+Erwartete Nachfrage Prognose=
+	Nachfrage Stosszeit
+	~	Bestellungen/Stunde
+	~	Prognose der Spitzennachfrage, vorab bekannt aus Wochentag, Wetter, Anlaessen, \
+		Gruppenreservationen und Plattform-Aktionen (Stoergroessen S1-S3). \
+		Vereinfachung: Prognose = tatsaechliche Spitze (perfekte Prognose).
+	|
+
+Nachfrage=
+	Nachfrage Basis+STEP(Nachfrage Stosszeit-Nachfrage Basis, 1)-STEP(Nachfrage Stosszeit-Nachfrage Basis, 4)
+	~	Bestellungen/Stunde
+	~	EXTERN. 17-18 Uhr Basis, 18-21 Uhr Stosszeit, 21-23 Uhr Basis.
+	|
+
+Nachfrage Basis=
+	9
+	~	Bestellungen/Stunde
+	~	Aus System Charter v1: ca. 110 Bestellungen pro Fr/Sa-Abend, ausserhalb der \
+		Spitze ca. 9 pro Stunde. OFFEN: mit Kassendaten pruefen.
+	|
+
+Nachfrage Stosszeit=
+	28
+	~	Bestellungen/Stunde
+	~	Aus System Charter v1: Spitze 18-21 Uhr ca. 28 Bestellungen pro Stunde. \
+		9 + 3x28 + 2x9 = 111 pro Abend, passt zu 400 pro Woche.
+	|
+
+********************************************************
+	.Control
+********************************************************~
+		Simulation Control Parameters
+	|
+
+FINAL TIME  = 6
+	~	Stunde
+	~	17 bis 23 Uhr.
+	|
+
+INITIAL TIME  = 0
+	~	Stunde
+	~	|
+
+SAVEPER  = 
+        TIME STEP
+	~	Stunde [0,?]
+	~	|
+
+TIME STEP  = 0.015625
+	~	Stunde [0,?]
+	~	Kleiner als ein Fünftel der kürzesten Verzögerung (5 Minuten).
+	|
+
+\\\---/// Sketch information - do not modify anything except names
+V300  Do not put anything below this section - it will be ignored
+*Pizzeria Da Luigi v8
+$192-192-192,0,Arial|12||0-0-0|0-0-0|0-0-255|-1--1--1|-1--1--1|96,96,90,0
+10,1,Verlorene Bestellungen,530,200,62,30,3,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,2,Offene Bestellungen,470,420,62,30,3,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,3,Bestellungen in Zubereitung,860,420,62,30,3,3,0,0,0,0,0,0,0,0,0,0,0,0
+12,4,48,170,200,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+12,5,48,170,420,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+12,6,48,1190,420,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+11,7,0,320,200,6,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,8,abgelehnte Bestellungen,395,174,60,14,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+11,9,0,320,420,6,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,10,angenommene Bestellungen,320,446,60,14,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+11,11,0,660,420,6,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,12,Zubereitung gestartet,590,396,60,14,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+11,13,0,1060,420,6,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,14,fertige Bestellungen,1060,446,60,14,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,15,Nachfrage,190,310,55,20,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,16,Nachfrage Basis,70,260,55,20,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,17,Nachfrage Stosszeit,70,370,55,20,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,18,Ablehnungsanteil,320,90,55,20,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,19,Schwelle Durchlaufzeit,170,30,55,20,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,20,Toleranzband,460,30,55,20,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,21,wahrgenommene Durchlaufzeit,680,90,55,20,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,22,Wahrnehmungsverzögerung,680,10,55,20,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,23,Erwartete Durchlaufzeit,930,90,55,20,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,24,Minuten je Stunde,1110,30,55,20,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,25,Wartezeit in Schlange,640,250,55,20,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,26,Backzeit,1290,300,55,20,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,27,Personal im Einsatz,340,620,55,20,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,28,Personalkapazität,500,600,55,20,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,29,Vorbereitungszeit,640,590,55,20,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,30,Leistung pro Person,500,720,55,20,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,31,freie Ofenplätze,880,560,55,20,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,32,Ofenplätze,1000,630,55,20,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,33,Ofenkapazität,1290,630,55,20,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,34,Auslastung Personal,700,830,55,20,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,35,Kapazität der Küche,980,830,55,20,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,36,Auslastung Ofen,1260,830,55,20,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,37,Erwartete Nachfrage Prognose,170,560,55,20,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,38,Feedforward Schalter,160,680,55,20,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,39,Basispersonal Kueche,230,790,55,20,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,40,Zusatzpersonal,380,800,55,20,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,41,Zubereitung gestartet,620,760,55,20,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128
+10,42,Personalkapazität,830,750,55,20,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128
+10,43,Bestellungen in Zubereitung,1350,760,55,20,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128
+10,44,Ofenplätze,1170,760,55,20,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128
+1,45,7,1,4,0,0,22,0,0,0,-1--1--1,,1|(425,200)|
+1,46,7,4,100,0,0,22,0,0,0,-1--1--1,,1|(245,200)|
+1,47,9,2,4,0,0,22,0,0,0,-1--1--1,,1|(395,420)|
+1,48,9,5,100,0,0,22,0,0,0,-1--1--1,,1|(245,420)|
+1,49,11,3,4,0,0,22,0,0,0,-1--1--1,,1|(760,420)|
+1,50,11,2,100,0,0,22,0,0,0,-1--1--1,,1|(565,420)|
+1,51,13,6,4,0,0,22,0,0,0,-1--1--1,,1|(1125,420)|
+1,52,13,3,100,0,0,22,0,0,0,-1--1--1,,1|(960,420)|
+1,53,16,15,0,0,43,0,0,64,0,-1--1--1,,1|(0,0)|
+1,54,17,15,0,0,43,0,0,64,0,-1--1--1,,1|(0,0)|
+1,55,15,8,0,0,43,0,0,64,0,-1--1--1,,1|(0,0)|
+1,56,15,10,0,0,43,0,0,64,0,-1--1--1,,1|(0,0)|
+1,57,8,10,1,0,45,0,0,64,0,-1--1--1,,1|(360,310)|
+1,58,18,8,0,0,43,0,0,64,0,-1--1--1,,1|(0,0)|
+1,59,19,18,0,0,45,0,0,64,0,-1--1--1,,1|(0,0)|
+1,60,20,18,0,0,45,0,0,64,0,-1--1--1,,1|(0,0)|
+1,61,21,18,0,0,43,0,0,64,0,-1--1--1,,1|(0,0)|
+1,62,23,21,0,0,43,0,0,192,0,-1--1--1,,1|(0,0)|
+1,63,22,21,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,64,25,23,0,0,43,0,0,64,0,-1--1--1,,1|(0,0)|
+1,65,26,23,0,0,43,0,0,64,0,-1--1--1,,1|(0,0)|
+1,66,24,23,0,0,43,0,0,64,0,-1--1--1,,1|(0,0)|
+1,67,2,25,0,0,43,0,0,64,0,-1--1--1,,1|(0,0)|
+1,68,12,25,0,0,45,0,0,64,0,-1--1--1,,1|(0,0)|
+1,69,2,12,1,0,43,0,0,64,0,-1--1--1,,1|(565,500)|
+1,70,29,12,0,0,45,0,0,64,0,-1--1--1,,1|(0,0)|
+1,71,28,12,0,0,43,0,0,64,0,-1--1--1,,1|(0,0)|
+1,72,31,12,0,0,43,0,0,64,0,-1--1--1,,1|(0,0)|
+1,73,14,12,1,0,43,0,0,64,0,-1--1--1,,1|(860,290)|
+1,74,30,29,0,0,45,0,0,64,0,-1--1--1,,1|(0,0)|
+1,75,30,28,0,0,43,0,0,64,0,-1--1--1,,1|(0,0)|
+1,76,27,28,0,0,43,0,0,64,0,-1--1--1,,1|(0,0)|
+1,77,32,31,0,0,43,0,0,64,0,-1--1--1,,1|(0,0)|
+1,78,3,31,0,0,45,0,0,64,0,-1--1--1,,1|(0,0)|
+1,79,3,14,1,0,43,0,0,192,0,-1--1--1,,1|(960,355)|
+1,80,26,14,0,0,45,0,0,64,0,-1--1--1,,1|(0,0)|
+1,81,32,33,0,0,43,0,0,64,0,-1--1--1,,1|(0,0)|
+1,82,26,33,0,0,45,0,0,64,0,-1--1--1,,1|(0,0)|
+1,83,33,35,0,0,43,0,0,64,0,-1--1--1,,1|(0,0)|
+1,84,42,35,0,0,43,0,0,64,0,-1--1--1,,1|(0,0)|
+1,85,41,34,0,0,43,0,0,64,0,-1--1--1,,1|(0,0)|
+1,86,42,34,0,0,45,0,0,64,0,-1--1--1,,1|(0,0)|
+1,87,43,36,0,0,43,0,0,64,0,-1--1--1,,1|(0,0)|
+1,88,44,36,0,0,45,0,0,64,0,-1--1--1,,1|(0,0)|
+1,89,17,37,0,0,43,0,0,64,0,-1--1--1,,1|(0,0)|
+1,90,37,27,0,0,43,0,0,64,0,-1--1--1,,1|(0,0)|
+1,91,38,27,0,0,43,0,0,64,0,-1--1--1,,1|(0,0)|
+1,92,39,27,0,0,43,0,0,64,0,-1--1--1,,1|(0,0)|
+1,93,40,27,0,0,43,0,0,64,0,-1--1--1,,1|(0,0)|
+1,94,30,27,0,0,45,0,0,64,0,-1--1--1,,1|(0,0)|
+12,95,0,700,-45,400,14,8,135,0,8,-1,0,0,0,-1--1--1,0-0-0,|16|B|0-0-0,0,0,0,0,0,0
+Pizzeria Da Luigi: Stock-Flow-Diagramm v8 (Bestellstopp, Engpass, Verzoegerungen, Feedforward)
+12,96,0,470,290,16,16,5,4,0,0,-1,0,0,0,0,0,0,0,0,0
+B1
+12,97,0,470,316,45,8,8,135,0,8,-1,0,0,0,-1--1--1,0-0-0,|10|B|0-0-0,0,0,0,0,0,0
+Bestellstopp
+12,98,0,960,378,16,16,5,4,0,0,-1,0,0,0,0,0,0,0,0,0
+B2
+12,99,0,960,404,45,8,8,135,0,8,-1,0,0,0,-1--1--1,0-0-0,|10|B|0-0-0,0,0,0,0,0,0
+Backen
+12,100,0,565,452,16,16,5,4,0,0,-1,0,0,0,0,0,0,0,0,0
+B3
+12,101,0,565,478,45,8,8,135,0,8,-1,0,0,0,-1--1--1,0-0-0,|10|B|0-0-0,0,0,0,0,0,0
+Abarbeiten
+12,102,0,980,885,80,8,8,135,0,8,-1,0,0,0,-1--1--1,0-0-0,|11|I|128-128-128,0,0,0,0,0,0
+Kennzahlen (KPI)
+12,103,0,40,465,50,8,8,135,0,8,-1,0,0,0,-1--1--1,0-128-0,|11|B|0-128-0,0,0,0,0,0,0
+Feedforward
+///---\\\
+:L<%^E!@
+1:current.vdfx
+4:Time
+5:Offene Bestellungen
+9:current
+19:90,0
+24:0
+25:6
+26:6
+23:0
+15:0,0,0,0,0,0
+27:0,
+34:0,
+42:0
+72:0
+73:0
+95:0
+96:0
+97:0
+77:0
+78:0
+102:1
+93:0
+94:0
+92:0
+91:0
+90:0
+87:0
+75:
+43:
+103:8,8,8,3,8
+105:0,0,0,0,0,0,0,0,0,0
+104:Vensim Sans|12||0-0-0|0-0-0|-1--1--1|0-0-255|192-192-192|-1--1--1

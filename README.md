@@ -31,16 +31,31 @@ Roter Faden ist das **10-Fragen-Modell** (System-to-Decision Framework): Das gew
 
 ## Struktur
 
+**Für weitere Aufgaben zuerst [`PIZZERIA_DA_LUIGI.md`](PIZZERIA_DA_LUIGI.md) lesen** – kompletter Projektkontext (System, Entscheidungen, Modelle, Gaps, Star Schema, nächste Schritte).
+
 ```
+PIZZERIA_DA_LUIGI.md        Projektkontext auf einen Blick
 docs/
-  kursplan.md            Modulbeschreibung, Ort/Zeit, Benotung, Prüfung
-  wochenuebersicht.md    Woche 1–14: Ziele, GK-Episoden, KK-Aufgaben, Deliverables
-  aufgabenverteilung.md  Rollen & Aufgaben pro Woche im Team
+  kursplan.md               Modulbeschreibung, Ort/Zeit, Benotung, Prüfung
+  wochenuebersicht.md       Woche 1–14: Ziele, GK-Episoden, KK-Aufgaben, Deliverables
+  aufgabenverteilung.md     Rollen & Aufgaben pro Woche im Team
 projekt/
-  deliverables.md        Checkliste aller Deliverables mit Status
-  projektjournal.md      Annahmen, Quellen, Entscheidungen, AI-Nutzung
-notizen/                 eigene Lernnotizen pro Woche / Prüfungsvorbereitung
+  deliverables.md           Status aller Deliverables mit Dateiverweisen
+  woche01-system-charter/   System Charter V2, Projektjournal (+ ältere Versionen)
+  woche02-05-modelle/       Kontextdiagramm v8, CLD final, Stock-Flow v8.1 (Vensim .mdl)
+  woche05-mission-brief/    Antwortkarten, BI Mission Brief V2, KK-Präsentationen
+  woche06-requirements/     IR Canvas, IR-Katalog, Traceability, Data Product Canvas
+  woche07-target-analysis/  Clark-Analyse, Canvas, Traceability, Data Gaps
+  woche08-data-sourcing/    Data Gap Map, Data Sourcing Plan G-02, Provenance, Präsentation
+  woche09-star-schema/      Star Schema, technische Doku, Spickzettel
+  daten/                    synthetischer Datenausschnitt (CSV)
+  uebungen/                 Übungsmodelle aus der KK
+notizen/                    BI-Zusammenfassung Woche 1–8 (Prüfungsvorbereitung)
 ```
+
+Jede .docx/.pptx/.pdf hat daneben eine gleichnamige **.md-Textversion**, damit der Inhalt direkt auf GitHub (und für Claude) lesbar ist. Vensim-Modelle (.mdl) mit Vensim PLE öffnen.
+
+Code der Pipeline (BigQuery): separates Repo `larabng/daeng-hs26-gcp-banlar01`.
 
 ## Quellen
 

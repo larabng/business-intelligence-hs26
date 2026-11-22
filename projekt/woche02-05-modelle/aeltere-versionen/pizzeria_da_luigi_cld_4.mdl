@@ -1,0 +1,364 @@
+{UTF-8}
+Abgelehnte Bestellungen  = A FUNCTION OF( Auslastung der Küche,Vorbereitete Teigmenge\
+		)
+	~	
+	~	Bestellungen, die bei hoher Auslastung nicht mehr angenommen werden \
+		(Bestellstopp). Steigt mit der Auslastung (+), sinkt mit mehr \
+		vorbereitetem Teig (-), weil seltener etwas ausverkauft ist. Heute nach \
+		Bauchgefühl entschieden. NGT Rang 1.
+	|
+
+Angenommene Bestellungen  = A FUNCTION OF( Nachfrage,Abgelehnte Bestellungen)
+	~	
+	~	Bestellungen, die angenommen werden. Steigt mit der Nachfrage (+), sinkt \
+		mit mehr abgelehnten Bestellungen (-).
+	|
+
+Auslastung der Küche  = A FUNCTION OF( Angenommene Bestellungen,Fehler und Nacharbeit,Personal im Einsatz,Ofenkapazität)
+	~	
+	~	Wie stark Küche und Pizzaofen ausgelastet sind. Steigt mit \
+		angenommenen Bestellungen (+) und mit Fehlern und Nacharbeit (+), \
+		sinkt mit mehr Personal im Einsatz (-) und mit mehr Ofenkapazität (-). \
+		Im CLD bewusst als eine Grösse zusammengefasst; das \
+		Stock-Flow-Diagramm v7 trennt die beiden Engpässe Personal und Ofen \
+		und leitet die Durchlaufzeit aus der Warteschlange ab. NGT Rang 4.
+	|
+
+Bewertung auf der Lieferplattform  = A FUNCTION OF( Lieferzeit,Fehler und Nacharbeit)
+	~	
+	~	Durchschnittliche Bewertung der Pizzeria auf der Lieferplattform \
+		(Sterne). Sinkt mit längerer Lieferzeit (-) und mit mehr Fehlern und \
+		Nacharbeit (-), z.B. falsche oder misslungene Pizzen. Bewerten können \
+		nur Online-Kunden; die Bewertung wirkt aber auch auf Gäste vor Ort und \
+		Abholer, weil sie vor dem Besuch online nachschauen (Annahme, im Team \
+		prüfen). NGT Rang 6.
+	|
+
+Fehler und Nacharbeit  = A FUNCTION OF( Auslastung der Küche)
+	~	
+	~	Falsche oder misslungene Bestellungen, die neu gemacht werden müssen. \
+		Steigt mit der Auslastung (+), weil Stress zu Fehlern führt. NGT Rang 6.
+	|
+
+Lieferzeit  = A FUNCTION OF( Auslastung der Küche)
+	~	
+	~	Zeit von der Bestellung bis zur Lieferung. Steigt mit der Auslastung der \
+		Küche (+).
+	|
+
+Nachfrage  = A FUNCTION OF( Bewertung auf der Lieferplattform,Nachfrageimpulse durch Wochenende und Wetter,Abgelehnte Bestellungen,Stammkundschaft,Aktionen und Rabatte)
+	~	
+	~	Bestellwünsche der Kundschaft. Steigt mit besserer Bewertung (+, \
+		verzögert), mit den Nachfrageimpulsen (+), mit mehr Stammkundschaft \
+		(+) und mit Aktionen und Rabatten (+). Sinkt mit mehr abgelehnten \
+		Bestellungen (-), weil abgewiesene Kundschaft zur Konkurrenz wechselt \
+		(Störgrösse S6). NGT Rang 2.
+	|
+
+Nachfrageimpulse durch Wochenende und Wetter  = A FUNCTION OF( )
+	~	
+	~	Externer Treiber. Freitag- und Samstagabende sowie Regenwetter erhöhen \
+		die Nachfrage (+). Kein Pfeil führt zu ihm zurück. Speist die \
+		Prognose (Feedforward). NGT Rang 2 und 10.
+	|
+
+Ofenkapazität  = A FUNCTION OF( )
+	~	
+	~	Externer Treiber. Wie viele Pizzas der Ofen gleichzeitig backen kann. Mehr \
+		Kapazität senkt die Auslastung (-). NGT Rang 4.
+	|
+
+Personal im Einsatz  = A FUNCTION OF( Auslastung der Küche,Verfügbarkeit Aushilfen,Erwartete Nachfrage Prognose)
+	~	
+	~	Anzahl Personen in Küche, Service und Lieferung. Steigt mit der \
+		Auslastung (+, verzögert, Einsatzplan wöchentlich), mit der \
+		Verfügbarkeit der Aushilfen (+) und mit der erwarteten Nachfrage (+, \
+		Feedforward). Entscheidung der Freunde (Charter 3a). NGT Rang 3.
+	|
+
+Verfügbarkeit Aushilfen  = A FUNCTION OF( Auslastung der Küche)
+	~	
+	~	Wie viele Aushilfen am Wochenende zusagen. Sinkt mit hoher Auslastung \
+		(-, verzögert), weil Stress und schlechte Arbeitsbedingungen die 2-3 \
+		Studierenden abschrecken (Charter 1, Kontextdiagramm: \
+		Arbeitsbedingungen). Mehr Zusagen erhöhen das Personal im Einsatz (+). \
+		NGT Rang 8.
+	|
+
+Vorbereitete Teigmenge  = A FUNCTION OF( Angenommene Bestellungen,Zutatenvorrat,Erwartete Nachfrage Prognose)
+	~	
+	~	Teig, der vor dem Service vorbereitet wird. Steigt mit den \
+		angenommenen Bestellungen (+, verzögert, Küchenchef orientiert sich an \
+		der Vorwoche), mit dem Zutatenvorrat (+) und mit der erwarteten \
+		Nachfrage (+, Feedforward). Entscheidung des Küchenchefs (Charter 3a). \
+		NGT Rang 5.
+	|
+
+Stammkundschaft  = A FUNCTION OF( Angenommene Bestellungen)
+	~	
+	~	Wiederkehrende Gäste aus der Nachbarschaft. Steigt mit angenommenen \
+		und gut erledigten Bestellungen (+, verzögert über Wochen) und erhöht \
+		die Nachfrage (+) über Mundpropaganda. Quelle: Charter 1 \
+		(Nachbarschaft, Familienbetrieb seit 20 Jahren), Charter 2 (lokale \
+		Vermarktung).
+	|
+
+Umsatz  = A FUNCTION OF( Angenommene Bestellungen)
+	~	
+	~	Umsatz pro Woche aus dem Kassensystem. Steigt mit den angenommenen \
+		Bestellungen (+). Quelle: Charter 2 (Kassensystem als Datenquelle).
+	|
+
+Aktionen und Rabatte  = A FUNCTION OF( Umsatz)
+	~	
+	~	Aktionen, Rabatte und lokale Werbung, die der Geschäftsführer (Cousin \
+		A) plant. Mehr davon, wenn der Umsatz sinkt (-, verzögert, \
+		wöchentliche Entscheidung). Erhöht die Nachfrage (+). Quelle: Charter \
+		2 (Preisgestaltung und Aktionen, lokale Vermarktung), Charter 3a.
+	|
+
+Zutatenvorrat  = A FUNCTION OF( Angenommene Bestellungen,Einkaufsmenge)
+	~	
+	~	Vorrat an Mehl, Tomaten, Käse usw. Sinkt mit mehr angenommenen \
+		Bestellungen (-) und steigt mit der Einkaufsmenge (+, verzögert bis \
+		zur nächsten Lieferung). Begrenzt die vorbereitete Teigmenge (+). \
+		Quelle: Charter 2 (Einkauf bei Lieferanten 2x pro Woche).
+	|
+
+Einkaufsmenge  = A FUNCTION OF( Zutatenvorrat,Erwartete Nachfrage Prognose)
+	~	
+	~	Menge, die 2x pro Woche bei den Lieferanten bestellt wird. Steigt, \
+		wenn der Vorrat tief ist (-), und mit der erwarteten Nachfrage (+, \
+		Feedforward). Quelle: Charter 2.
+	|
+
+Erwartete Nachfrage Prognose  = A FUNCTION OF( Nachfrageimpulse durch Wochenende und Wetter)
+	~	
+	~	FEEDFORWARD. Prognose der Nachfrage für die kommenden Tage aus \
+		Wochentag, Wetter, Anlässen, Gruppenreservationen und \
+		Plattform-Aktionen (Störgrössen S1-S3 im Kontextdiagramm). Wirkt \
+		direkt auf Teigmenge, Personal und Einkauf, bevor sich die Nachfrage \
+		in den Bestellungen zeigt, und umgeht so die Verzögerungen von B3 und \
+		R2.
+	|
+
+********************************************************
+	.Control
+********************************************************~
+		Simulation Control Parameters
+	|
+
+FINAL TIME  = 30
+	~	Day
+	~	The final time for the simulation.
+	|
+
+INITIAL TIME  = 0
+	~	Day
+	~	The initial time for the simulation.
+	|
+
+SAVEPER  = 
+        TIME STEP
+	~	Day [0,?]
+	~	The frequency with which output is stored.
+	|
+
+TIME STEP  = 1
+	~	Day [0,?]
+	~	The time step for the simulation.
+	|
+
+\\\---/// Sketch information - do not modify anything except names
+V300  Do not put anything below this section - it will be ignored
+*Pizzeria Da Luigi
+$192-192-192,0,Arial|12||0-0-0|0-0-0|0-0-255|-1--1--1|-1--1--1|96,96,90,0
+10,1,Angenommene Bestellungen,780,571,60,20,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,2,Auslastung der Küche,520,571,60,20,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,3,Fehler und Nacharbeit,230,466,60,20,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,4,Lieferzeit,400,381,40,20,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,5,Bewertung auf der Lieferplattform,650,281,60,20,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,6,Nachfrage,910,381,40,20,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,7,Abgelehnte Bestellungen,650,761,60,20,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,8,Vorbereitete Teigmenge,920,791,60,20,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,9,Personal im Einsatz,270,851,60,20,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,10,Nachfrageimpulse durch Wochenende und Wetter,1100,301,60,20,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,11,Ofenkapazität,500,941,42,20,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,12,Verfügbarkeit Aushilfen,120,951,60,20,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,13,1,2,1,0,43,0,0,64,0,-1--1--1,,1|(650,597)|
+1,14,2,4,1,0,43,0,0,64,0,-1--1--1,,1|(488,458)|
+1,15,4,5,1,0,45,0,0,64,0,-1--1--1,,1|(510,293)|
+1,16,5,6,1,0,43,0,0,192,0,-1--1--1,,1|(795,292)|
+1,17,6,1,1,0,43,0,0,64,0,-1--1--1,,1|(874,495)|
+1,18,2,3,1,0,43,0,0,64,0,-1--1--1,,1|(356,571)|
+1,19,3,2,1,0,43,0,0,64,0,-1--1--1,,1|(394,466)|
+1,20,2,7,1,0,43,0,0,64,0,-1--1--1,,1|(579,666)|
+1,21,7,1,1,0,45,0,0,64,0,-1--1--1,,1|(744,685)|
+1,22,1,8,1,0,43,0,0,192,0,-1--1--1,,1|(883,660)|
+1,23,8,7,1,0,45,0,0,64,0,-1--1--1,,1|(780,817)|
+1,24,2,9,1,0,43,0,0,192,0,-1--1--1,,1|(431,743)|
+1,25,9,2,1,0,45,0,0,64,0,-1--1--1,,1|(359,679)|
+1,26,10,6,0,0,43,0,0,64,0,-1--1--1,,1|(0,0)|
+1,27,11,2,0,0,45,0,0,64,0,-1--1--1,,1|(0,0)|
+1,28,12,9,0,0,43,0,0,64,0,-1--1--1,,1|(0,0)|
+12,29,0,660,441,16,16,4,4,0,0,-1,0,0,0,0,0,0,0,0,0
+B2
+12,30,0,660,465,45,8,8,135,0,8,-1,0,0,0,-1--1--1,0-0-0,|10|B|0-0-0,0,0,0,0,0,0
+Ruf und Nachfrage
+12,31,0,375,516,16,16,4,4,0,0,-1,0,0,0,0,0,0,0,0,0
+R1
+12,32,0,375,540,45,8,8,135,0,8,-1,0,0,0,-1--1--1,0-0-0,|10|B|0-0-0,0,0,0,0,0,0
+Stress-Spirale
+12,33,0,645,646,16,16,5,4,0,0,-1,0,0,0,0,0,0,0,0,0
+B1
+12,34,0,645,670,45,8,8,135,0,8,-1,0,0,0,-1--1--1,0-0-0,|10|B|0-0-0,0,0,0,0,0,0
+Bestellstopp
+12,35,0,785,711,16,16,4,4,0,0,-1,0,0,0,0,0,0,0,0,0
+R2
+12,36,0,785,735,45,8,8,135,0,8,-1,0,0,0,-1--1--1,0-0-0,|10|B|0-0-0,0,0,0,0,0,0
+Teigvorrat
+12,37,0,379,715,16,16,4,4,0,0,-1,0,0,0,0,0,0,0,0,0
+B3
+12,38,0,373,742,45,8,8,135,0,8,-1,0,0,0,-1--1--1,0-0-0,|10|B|0-0-0,0,0,0,0,0,0
+Personalplanung
+12,41,0,640,201,300,14,8,135,0,8,-1,0,0,0,-1--1--1,0-0-0,|16|B|0-0-0,0,0,0,0,0,0
+Pizzeria Da Luigi: Causal Loop Diagram v4 (NGT + System Charter v1, mit Feedforward)
+12,42,0,1640,281,200,9,8,135,0,8,-1,0,0,0,-1--1--1,0-0-0,|12|B|0-0-128,0,0,0,0,0,0
+1  Variablen
+12,43,0,1640,329,200,32,8,135,0,0,-1,0,0,0,0,0,0,0,0,0
+Alle Variablen können zu- oder abnehmen und stammen aus der NGT (Rang steht im Kommentar jeder Variable). Deshalb heisst es «Bewertung auf der Lieferplattform» und nicht «schlechte Bewertungen».
+12,44,0,1640,391,200,9,8,135,0,8,-1,0,0,0,-1--1--1,0-0-0,|12|B|0-0-128,0,0,0,0,0,0
+2  R1 Stress-Spirale
+12,45,0,1640,423,200,16,8,135,0,0,-1,0,0,0,0,0,0,0,0,0
+Mehr Auslastung -> mehr Fehler und Nacharbeit -> noch mehr Auslastung. Kein Minuszeichen, also verstärkt sich der Loop selbst.
+12,46,0,1640,469,200,9,8,135,0,8,-1,0,0,0,-1--1--1,0-0-0,|12|B|0-0-128,0,0,0,0,0,0
+3  B1 Bestellstopp
+12,47,0,1640,517,200,32,8,135,0,0,-1,0,0,0,0,0,0,0,0,0
+Mehr Auslastung -> mehr abgelehnte Bestellungen -> weniger angenommene Bestellungen -> weniger Auslastung. Ein Minuszeichen, also gleicht der Loop aus. Heute wird nach Bauchgefühl entschieden (Entscheidung 3, NGT Rang 1).
+12,48,0,1640,579,200,9,8,135,0,8,-1,0,0,0,-1--1--1,0-0-0,|12|B|0-0-128,0,0,0,0,0,0
+4  B2 Ruf und Nachfrage
+12,49,0,1640,627,200,32,8,135,0,0,-1,0,0,0,0,0,0,0,0,0
+Mehr Bestellungen -> mehr Auslastung -> längere Lieferzeit und mehr Fehler -> schlechtere Bewertung -> weniger Nachfrage -> weniger Bestellungen. Ein Minuszeichen, also gleicht der Loop aus. Der Ausgleich kostet aber Ruf und Umsatz.
+12,50,0,1640,689,200,9,8,135,0,8,-1,0,0,0,-1--1--1,0-0-0,|12|B|0-0-128,0,0,0,0,0,0
+5  B3 Personalplanung
+12,51,0,1640,721,200,16,8,135,0,0,-1,0,0,0,0,0,0,0,0,0
+Mehr Auslastung -> mehr Personal im Einsatz -> weniger Auslastung. Ein Minuszeichen, also gleicht der Loop aus (Entscheidung 2).
+12,52,0,1640,767,200,9,8,135,0,8,-1,0,0,0,-1--1--1,0-0-0,|12|B|0-0-128,0,0,0,0,0,0
+6  R2 Teigvorrat
+12,53,0,1640,815,200,32,8,135,0,0,-1,0,0,0,0,0,0,0,0,0
+Mehr Bestellungen -> mehr vorbereiteter Teig -> weniger Ablehnungen, weil seltener etwas ausverkauft ist -> mehr Bestellungen. Zwei Minuszeichen heben sich auf, also verstärkt sich der Loop (Entscheidung 1).
+12,54,0,1640,877,200,9,8,135,0,8,-1,0,0,0,-1--1--1,0-0-0,|12|B|0-0-128,0,0,0,0,0,0
+7  Delay
+12,55,0,1640,925,200,32,8,135,0,0,-1,0,0,0,0,0,0,0,0,0
+Verzögerte Pfeile sind mit dem Delay-Zeichen markiert: Personal (Einsatzplan wöchentlich), Teig (Schätzung nach der Vorwoche), Bewertung -> Nachfrage (wirkt nach Tagen), Stammkundschaft, Aktionen, Aushilfen und Einkauf. Kurzfristig greift deshalb nur B1, der Bestellstopp.
+12,56,0,1640,987,200,9,8,135,0,8,-1,0,0,0,-1--1--1,0-0-0,|12|B|0-0-128,0,0,0,0,0,0
+8  Externe Treiber
+12,57,0,1640,1027,200,24,8,135,0,0,-1,0,0,0,0,0,0,0,0,0
+Nachfrageimpulse durch Wochenende und Wetter und Ofenkapazität wirken auf das System, aber nichts im Diagramm wirkt auf sie zurück. Verfügbarkeit Aushilfen ist neu Teil von R4.
+12,58,0,1640,1081,200,9,8,135,0,8,-1,0,0,0,-1--1--1,0-0-0,|12|B|0-0-128,0,0,0,0,0,0
+9  Ansatzpunkt für BI
+12,59,0,1640,1113,200,16,8,135,0,0,-1,0,0,0,0,0,0,0,0,0
+Ein datenbasiertes Bestelllimit stärkt B1 und greift, bevor R1 und B2 anlaufen. Es kostet aber Kundschaft (B4). Die Prognose (Feedforward) setzt früher an: Personal, Teig und Einkauf werden geplant, bevor der Stau entsteht.
+10,61,Stammkundschaft,1060,430,60,20,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,62,Umsatz,1120,640,40,20,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,63,Aktionen und Rabatte,1290,520,60,20,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,64,Erwartete Nachfrage Prognose,1300,780,60,20,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,65,Zutatenvorrat,1150,890,50,20,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,66,Einkaufsmenge,1310,980,50,20,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,67,7,6,1,0,45,0,0,64,0,-1--1--1,,1|(990,600)|
+1,68,1,61,0,0,43,0,0,192,0,-1--1--1,,1|(0,0)|
+1,69,61,6,0,0,43,0,0,64,0,-1--1--1,,1|(0,0)|
+1,70,1,62,0,0,43,0,0,64,0,-1--1--1,,1|(0,0)|
+1,71,62,63,0,0,45,0,0,192,0,-1--1--1,,1|(0,0)|
+1,72,63,6,1,0,43,0,0,64,0,-1--1--1,,1|(1150,330)|
+1,73,2,12,1,0,45,0,0,192,0,-1--1--1,,1|(180,700)|
+1,74,1,65,0,0,45,0,0,64,0,-1--1--1,,1|(0,0)|
+1,75,65,8,0,0,43,0,0,64,0,-1--1--1,,1|(0,0)|
+1,76,65,66,1,0,45,0,0,64,0,-1--1--1,,1|(1270,890)|
+1,77,66,65,1,0,43,0,0,192,0,-1--1--1,,1|(1180,990)|
+1,78,10,64,0,0,43,0,0,64,0,-1--1--1,,1|(0,0)|
+1,79,64,8,0,0,43,0,0,64,0,-1--1--1,,1|(0,0)|
+1,80,64,9,1,0,43,0,0,64,0,-1--1--1,,1|(800,1220)|
+1,81,64,66,0,0,43,0,0,64,0,-1--1--1,,1|(0,0)|
+12,82,0,895,530,16,16,5,4,0,0,-1,0,0,0,0,0,0,0,0,0
+B4
+12,83,0,895,554,45,8,8,135,0,8,-1,0,0,0,-1--1--1,0-0-0,|10|B|0-0-0,0,0,0,0,0,0
+Abwanderung
+12,84,0,950,445,16,16,5,4,0,0,-1,0,0,0,0,0,0,0,0,0
+R3
+12,85,0,950,469,45,8,8,135,0,8,-1,0,0,0,-1--1--1,0-0-0,|10|B|0-0-0,0,0,0,0,0,0
+Mundpropaganda
+12,86,0,1170,545,16,16,5,4,0,0,-1,0,0,0,0,0,0,0,0,0
+B5
+12,87,0,1170,569,45,8,8,135,0,8,-1,0,0,0,-1--1--1,0-0-0,|10|B|0-0-0,0,0,0,0,0,0
+Umsatz und Aktionen
+12,88,0,275,750,16,16,5,4,0,0,-1,0,0,0,0,0,0,0,0,0
+R4
+12,89,0,275,774,45,8,8,135,0,8,-1,0,0,0,-1--1--1,0-0-0,|10|B|0-0-0,0,0,0,0,0,0
+Aushilfen-Erschöpfung
+12,90,0,1215,925,16,16,4,4,0,0,-1,0,0,0,0,0,0,0,0,0
+B6
+12,91,0,1215,949,45,8,8,135,0,8,-1,0,0,0,-1--1--1,0-0-0,|10|B|0-0-0,0,0,0,0,0,0
+Nachbestellung
+12,92,0,1390,740,40,8,8,135,0,8,-1,0,0,0,-1--1--1,0-0-0,|10|B|0-128-0,0,0,0,0,0,0
+Feedforward
+12,93,0,1640,1170,200,9,8,135,0,8,-1,0,0,0,-1--1--1,0-0-0,|12|B|0-0-128,0,0,0,0,0,0
+10  B4 Abwanderung (neu)
+12,94,0,1640,1210,200,32,8,135,0,0,-1,0,0,0,0,0,0,0,0,0
+Mehr Auslastung -> mehr abgelehnte Bestellungen -> weniger Nachfrage, weil Kundschaft zur Konkurrenz wechselt -> weniger angenommene Bestellungen -> weniger Auslastung. Gleicht aus, kostet aber dauerhaft Kundschaft (Charter 4, Entscheidung 3).
+12,95,0,1640,1270,200,9,8,135,0,8,-1,0,0,0,-1--1--1,0-0-0,|12|B|0-0-128,0,0,0,0,0,0
+11  R3 Mundpropaganda (neu)
+12,96,0,1640,1310,200,32,8,135,0,0,-1,0,0,0,0,0,0,0,0,0
+Mehr angenommene Bestellungen -> mit Verzögerung mehr Stammkundschaft -> mehr Nachfrage -> mehr Bestellungen. Verstärkt sich selbst (Charter 1: Nachbarschaft, Familienbetrieb).
+12,97,0,1640,1370,200,9,8,135,0,8,-1,0,0,0,-1--1--1,0-0-0,|12|B|0-0-128,0,0,0,0,0,0
+12  B5 Umsatz und Aktionen (neu)
+12,98,0,1640,1410,200,32,8,135,0,0,-1,0,0,0,0,0,0,0,0,0
+Weniger Bestellungen -> weniger Umsatz -> der Geschäftsführer macht mehr Aktionen und Rabatte -> mehr Nachfrage -> mehr Bestellungen. Gleicht aus, mit Verzögerung (Charter 2: Preisgestaltung, Aktionen; Charter 3a).
+12,99,0,1640,1470,200,9,8,135,0,8,-1,0,0,0,-1--1--1,0-0-0,|12|B|0-0-128,0,0,0,0,0,0
+13  R4 Aushilfen-Erschöpfung (neu)
+12,100,0,1640,1510,200,32,8,135,0,0,-1,0,0,0,0,0,0,0,0,0
+Mehr Auslastung -> mit Verzögerung weniger Zusagen der Aushilfen -> weniger Personal im Einsatz -> noch mehr Auslastung. Zwei Minuszeichen, also verstärkt sich der Loop (Charter 1: 2-3 Studierende am Wochenende).
+12,101,0,1640,1570,200,9,8,135,0,8,-1,0,0,0,-1--1--1,0-0-0,|12|B|0-0-128,0,0,0,0,0,0
+14  B6 Nachbestellung (neu)
+12,102,0,1640,1610,200,32,8,135,0,0,-1,0,0,0,0,0,0,0,0,0
+Tiefer Zutatenvorrat -> grössere Einkaufsmenge -> mit Verzögerung (Lieferung 2x pro Woche) mehr Vorrat. Gleicht aus. Ist der Vorrat leer, sinkt die Teigmenge und es wird mehr abgelehnt (Charter 2: Einkauf).
+12,103,0,1640,1670,200,9,8,135,0,8,-1,0,0,0,-1--1--1,0-0-0,|12|B|0-0-128,0,0,0,0,0,0
+15  Feedforward (neu)
+12,104,0,1640,1710,200,32,8,135,0,0,-1,0,0,0,0,0,0,0,0,0
+Erwartete Nachfrage Prognose: Wochentag, Wetter, Anlässe, Gruppenreservationen und Plattform-Aktionen (S1-S3) wirken direkt auf Teigmenge, Personal und Einkauf, bevor sie in den Bestellungen sichtbar werden. Das umgeht die Verzögerungen von R2 und B3.
+1,105,3,5,1,0,45,0,0,64,0,-1--1--1,,1|(330,300)|
+12,106,0,1640,1770,200,9,8,135,0,8,-1,0,0,0,-1--1--1,0-0-0,|12|B|0-0-128,0,0,0,0,0,0
+16  Zeitskalen
+12,107,0,1640,1810,200,32,8,135,0,0,-1,0,0,0,0,0,0,0,0,0
+Minuten (ein Abend): B1 Bestellstopp, R1 Stress-Spirale. Tage: R2 Teigvorrat, B6 Nachbestellung. Wochen: B2 Ruf, B3 Personalplanung, B4 Abwanderung, B5 Aktionen, R3 Mundpropaganda, R4 Aushilfen. Das Stock-Flow v7 bildet nur die Minuten-Ebene eines Abends ab.
+///---\\\
+:L<%^E!@
+5:Auslastung der Küche
+19:90,0
+24:0
+25:0
+26:0
+23:0
+15:0,0,0,0,0,0
+27:0,
+34:0,
+42:0
+72:0
+73:0
+95:0
+96:0
+97:0
+77:0
+78:0
+102:1
+93:0
+94:0
+92:0
+91:0
+90:0
+87:0
+75:
+43:
+103:8,8,8,3,8
+105:0,0,0,0,0,0,0,0,0,0
+104:Vensim Sans|12||0-0-0|0-0-0|-1--1--1|0-0-255|192-192-192|-1--1--1

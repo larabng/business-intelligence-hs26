@@ -1,0 +1,156 @@
+{UTF-8}
+Nachfrage PS  = A FUNCTION OF( )
+	~	
+	~		|
+
+Anteil junger Lenker
+	~	
+	~		|
+
+Gruppendruck  = A FUNCTION OF( Raser und Poser Aktivität,Anteil junger Lenker)
+	~	
+	~		|
+
+Gute Fahrbedingungen
+	~	
+	~		|
+
+Härte der Sanktionen  = A FUNCTION OF( Raser und Poser Aktivität)
+	~	
+	~		|
+
+Kontrolldichte  = A FUNCTION OF( Raser und Poser Aktivität)
+	~	
+	~		|
+
+Raser und Poser Aktivität  = A FUNCTION OF( Wahrgenommenes Erwischrisiko,Härte der Sanktionen\
+		,Verkehrsberuhigte Strecken,Gruppendruck,Suche nach Nervenkitzel,Zeitdruck,Gute Fahrbedingungen\
+		,Verfügbarkeit leistungsstarker Autos)
+	~	
+	~		|
+
+Suche nach Nervenkitzel  = A FUNCTION OF( Anteil junger Lenker)
+	~	
+	~		|
+
+Verfügbarkeit leistungsstarker Autos
+	~	
+	~		|
+
+Verkehrsberuhigte Strecken  = A FUNCTION OF( Raser und Poser Aktivität)
+	~	
+	~		|
+
+Wahrgenommenes Erwischrisiko  = A FUNCTION OF( Kontrolldichte)
+	~	
+	~		|
+
+Zeitdruck
+	~	
+	~		|
+
+********************************************************
+	.Control
+********************************************************~
+		Simulation Control Parameters
+	|
+
+FINAL TIME  = 100
+	~	Month
+	~	The final time for the simulation.
+	|
+
+INITIAL TIME  = 0
+	~	Month
+	~	The initial time for the simulation.
+	|
+
+SAVEPER  = 
+        TIME STEP
+	~	Month [0,?]
+	~	The frequency with which output is stored.
+	|
+
+TIME STEP  = 1
+	~	Month [0,?]
+	~	The time step for the simulation.
+	|
+
+\\\---/// Sketch information - do not modify anything except names
+V300  Do not put anything below this section - it will be ignored
+*View 1
+$192-192-192,0,Arial|12||0-0-0|0-0-0|0-0-255|-1--1--1|-1--1--1|96,96,161,0
+10,1,Raser und Poser Aktivität,834,362,123,74,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,2,Kontrolldichte,1056,163,51,11,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,3,Wahrgenommenes Erwischrisiko,1257,259,62,18,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,4,Härte der Sanktionen,826,56,62,18,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,5,Verkehrsberuhigte Strecken,529,569,62,18,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,6,Gruppendruck,1116,569,78,37,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,7,Suche nach Nervenkitzel,764,614,62,18,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,8,Anteil junger Lenker,853,733,62,18,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,9,Zeitdruck,325,296,35,11,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,10,Gute Fahrbedingungen,318,390,62,18,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,11,Verfügbarkeit leistungsstarker Autos,401,162,62,18,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,12,1,2,1,0,43,0,0,192,0,-1--1--1,,1|(927,218)|
+1,13,2,3,1,0,43,0,0,64,0,-1--1--1,,1|(1186,162)|
+1,14,3,1,1,0,45,0,0,64,0,-1--1--1,,1|(1081,362)|
+1,15,1,4,1,0,43,0,0,192,0,-1--1--1,,1|(757,137)|
+1,16,4,1,1,0,45,0,0,64,0,-1--1--1,,1|(881,198)|
+1,17,1,5,1,0,43,0,0,192,0,-1--1--1,,1|(717,540)|
+1,18,5,1,1,0,45,0,0,64,0,-1--1--1,,1|(626,435)|
+1,19,1,6,1,0,43,0,0,64,0,-1--1--1,,1|(1129,503)|
+1,20,6,1,1,0,43,0,0,64,0,-1--1--1,,1|(942,503)|
+1,21,8,6,1,0,43,0,0,64,0,-1--1--1,,1|(1035,679)|
+1,22,8,7,1,0,43,0,0,64,0,-1--1--1,,1|(783,693)|
+1,23,7,1,1,0,43,0,0,64,0,-1--1--1,,1|(817,510)|
+1,24,9,1,0,0,43,0,0,64,0,-1--1--1,,1|(0,0)|
+1,25,10,1,0,0,43,0,0,64,0,-1--1--1,,1|(0,0)|
+1,26,11,1,1,0,43,0,0,64,0,-1--1--1,,1|(587,129)|
+12,27,0,1098,248,15,15,5,4,0,0,-1,0,0,0,0,0,0,0,0,0
+B1
+12,28,0,1103,280,45,8,8,4,0,0,-1,0,0,0,0,0,0,0,0,0
+Kontrolldruck
+12,29,0,817,172,15,15,4,4,0,0,-1,0,0,0,0,0,0,0,0,0
+B2
+12,30,0,823,215,46,18,8,4,0,0,-1,0,0,0,0,0,0,0,0,0
+Härtere Strafen
+12,31,0,703,461,15,15,5,4,0,0,-1,0,0,0,0,0,0,0,0,0
+B3
+12,32,0,693,489,45,8,8,4,0,0,-1,0,0,0,0,0,0,0,0,0
+Strassenbau
+12,33,0,1005,435,15,15,4,4,0,0,-1,0,0,0,0,0,0,0,0,0
+R1
+12,34,0,1032,481,45,21,8,4,0,0,-1,0,0,0,0,0,0,0,0,0
+Gruppendynamik
+10,35,Nachfrage PS,561,245,50,26,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+///---\\\
+:L<%^E!@
+5:Verkehrsberuhigte Strecken
+19:161,0
+24:0
+25:0
+26:0
+23:0
+15:0,0,0,0,0,0
+27:0,
+34:0,
+42:0
+72:0
+73:0
+95:0
+96:0
+97:0
+77:0
+78:0
+102:1
+93:0
+94:0
+92:0
+91:0
+90:0
+87:0
+75:
+43:
+103:8,8,8,3,8
+105:0,0,0,0,0,0,0,0,0,0
+104:Vensim Sans|12||0-0-0|0-0-0|-1--1--1|0-0-255|192-192-192|-1--1--1

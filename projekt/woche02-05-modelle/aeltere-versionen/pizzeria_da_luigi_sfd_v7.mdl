@@ -1,0 +1,339 @@
+{UTF-8}
+Offene Bestellungen= INTEG (
+	angenommene Bestellungen-Zubereitung gestartet,
+		0)
+	~	Bestellungen
+	~	STOCK (Warteschlange). Angenommene Bestellungen, mit deren Zubereitung noch \
+		niemand begonnen hat.
+	|
+
+Bestellungen in Zubereitung= INTEG (
+	Zubereitung gestartet-fertige Bestellungen,
+		0)
+	~	Bestellungen
+	~	STOCK. Belegt oder im Ofen. Materielle Verzögerung: Abfluss = Bestand / Backzeit.
+	|
+
+Verlorene Bestellungen= INTEG (
+	abgelehnte Bestellungen,
+		0)
+	~	Bestellungen
+	~	STOCK. Kumuliert abgelehnte Nachfrage des Abends.
+	|
+
+angenommene Bestellungen=
+	Nachfrage-abgelehnte Bestellungen
+	~	Bestellungen/Stunde
+	~	INFLOW.
+	|
+
+abgelehnte Bestellungen=
+	Nachfrage*Ablehnungsanteil
+	~	Bestellungen/Stunde
+	~	FLOW in Verlorene Bestellungen.
+	|
+
+Ablehnungsanteil=
+	MIN(1, MAX(0, (wahrgenommene Durchlaufzeit-Schwelle Durchlaufzeit)/Toleranzband))
+	~	Dmnl
+	~	ENTSCHEIDUNGSREGEL des Küchenchefs, in Minuten statt Auslastung. Default = \
+		exakte Übersetzung der Teamregel 1.5 / 2.5 aus v3 (22.5 bis 37.5 Minuten).
+	|
+
+Schwelle Durchlaufzeit=
+	22.5
+	~	Minuten
+	~	HEBELPUNKT. Ab dieser wahrgenommenen Durchlaufzeit beginnt die Ablehnung. \
+		Aus Teamregel 1.5 abgeleitet. OFFEN: Lieferzusage erfragen.
+	|
+
+Toleranzband=
+	15
+	~	Minuten
+	~	Spanne von erster bis vollständiger Ablehnung. Aus Teamregel 2.5 abgeleitet.
+	|
+
+Zubereitung gestartet=
+	MIN(Offene Bestellungen/Vorbereitungszeit, MIN(Personalkapazität, fertige Bestellungen+freie Ofenplätze/Vorbereitungszeit))
+	~	Bestellungen/Stunde
+	~	FLOW. Begrenzt durch Personal (Engpass 1) und freie Ofenplätze (Engpass 2).
+	|
+
+fertige Bestellungen=
+	Bestellungen in Zubereitung/Backzeit
+	~	Bestellungen/Stunde
+	~	OUTFLOW. Materielle Verzögerung 1. Ordnung mit der Backzeit.
+	|
+
+Vorbereitungszeit=
+	1/Leistung pro Person
+	~	Stunde
+	~	VERZÖGERUNG. Abgeleitet: 12 Bestellungen pro Person und Stunde = 5 Minuten.
+	|
+
+Personalkapazität=
+	Personal im Einsatz*Leistung pro Person
+	~	Bestellungen/Stunde
+	~	Kapazität des Engpasses Personal.
+	|
+
+freie Ofenplätze=
+	MAX(0, Ofenplätze-Bestellungen in Zubereitung)
+	~	Bestellungen
+	~	Freie Plätze im Ofen.
+	|
+
+Ofenkapazität=
+	Ofenplätze/Backzeit
+	~	Bestellungen/Stunde
+	~	Durchsatz des Ofens.
+	|
+
+Kapazität der Küche=
+	MIN(Ofenkapazität, Personalkapazität)
+	~	Bestellungen/Stunde
+	~	Engpass = der kleinere Wert.
+	|
+
+Auslastung Personal=
+	ZIDZ(Zubereitung gestartet, Personalkapazität)
+	~	Dmnl
+	~	KPI 0..1. Echte Auslastung des Personals.
+	|
+
+Auslastung Ofen=
+	ZIDZ(Bestellungen in Zubereitung, Ofenplätze)
+	~	Dmnl
+	~	KPI 0..1. Belegung des Ofens.
+	|
+
+Erwartete Durchlaufzeit=
+	(Wartezeit in Schlange+Vorbereitungszeit+Backzeit)*Minuten je Stunde
+	~	Minuten
+	~	KPI. Little's Law: Wartezeit in der Schlange plus Zubereitung plus Backen.
+	|
+
+Wartezeit in Schlange=
+	IF THEN ELSE(Offene Bestellungen<0.001, 0, XIDZ(Offene Bestellungen, Zubereitung gestartet, 99))
+	~	Stunde
+	~	Little's Law. 99 Stunden, wenn nichts mehr gestartet wird (z.B. kein Personal).
+	|
+
+wahrgenommene Durchlaufzeit=
+	SMOOTH(Erwartete Durchlaufzeit, Wahrnehmungsverzögerung)
+	~	Minuten
+	~	INFORMATIONSVERZÖGERUNG. Der Küchenchef sieht den Stau erst verzögert.
+	|
+
+Wahrnehmungsverzögerung=
+	0.015625
+	~	Stunde
+	~	OFFEN. Default = 1 Zeitschritt (praktisch sofort, wie Modell v3). In der \
+		Sensitivität 5 bis 30 Minuten getestet.
+	|
+
+Minuten je Stunde=
+	60
+	~	Minuten/Stunde
+	~	|
+
+Backzeit=
+	0.25
+	~	Stunde
+	~	VERZÖGERUNG. Teamwert v3. OFFEN: reine Ofenzeit oder ganze Durchlaufzeit?
+	|
+
+Leistung pro Person=
+	12
+	~	Bestellungen/(Stunde*Personen)
+	~	Teamwert v3. OFFEN: aus Kassendaten messen.
+	|
+
+Ofenplätze=
+	10
+	~	Bestellungen
+	~	Abgeleitet aus Teamwerten: 40 pro Stunde x 0.25 Stunden. OFFEN: echte Anzahl.
+	|
+
+Personal im Einsatz=
+	3
+	~	Personen
+	~	Teamwert v3, aus dem Wochenend-Einsatzplan.
+	|
+
+Nachfrage=
+	Nachfrage Basis+STEP(Nachfrage Stosszeit-Nachfrage Basis, 1)-STEP(Nachfrage Stosszeit-Nachfrage Basis, 4)
+	~	Bestellungen/Stunde
+	~	EXTERN.
+	|
+
+Nachfrage Basis=
+	30
+	~	Bestellungen/Stunde
+	~	Teamwert v3. OFFEN: Kassendaten.
+	|
+
+Nachfrage Stosszeit=
+	60
+	~	Bestellungen/Stunde
+	~	Teamwert v3. OFFEN: Kassendaten. Widerspricht 400/Woche im Charter.
+	|
+
+********************************************************
+	.Control
+********************************************************~
+		Simulation Control Parameters
+	|
+
+FINAL TIME  = 6
+	~	Stunde
+	~	17 bis 23 Uhr.
+	|
+
+INITIAL TIME  = 0
+	~	Stunde
+	~	|
+
+SAVEPER  = 
+        TIME STEP
+	~	Stunde [0,?]
+	~	|
+
+TIME STEP  = 0.015625
+	~	Stunde [0,?]
+	~	Kleiner als ein Fünftel der kürzesten Verzögerung (5 Minuten).
+	|
+
+\\\---/// Sketch information - do not modify anything except names
+V300  Do not put anything below this section - it will be ignored
+*Pizzeria Da Luigi v7
+$192-192-192,0,Arial|12||0-0-0|0-0-0|0-0-255|-1--1--1|-1--1--1|96,96,90,0
+12,1,48,140,360,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+11,2,0,290,360,6,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,3,angenommene Bestellungen,290,384,60,14,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,4,Offene Bestellungen,460,360,62,30,3,3,0,0,0,0,0,0,0,0,0,0,0,0
+11,5,0,650,360,6,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,6,Zubereitung gestartet,650,384,60,14,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,7,Bestellungen in Zubereitung,850,360,62,30,3,3,0,0,0,0,0,0,0,0,0,0,0,0
+11,8,0,1040,360,6,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,9,fertige Bestellungen,1040,384,60,14,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+12,10,48,1190,360,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,11,2,4,4,0,0,22,0,0,0,-1--1--1,,1|(390,360)|
+1,12,2,1,100,0,0,22,0,0,0,-1--1--1,,1|(210,360)|
+1,13,5,4,100,0,0,22,0,0,0,-1--1--1,,1|(550,360)|
+1,14,5,7,4,0,0,22,0,0,0,-1--1--1,,1|(760,360)|
+1,15,8,7,100,0,0,22,0,0,0,-1--1--1,,1|(950,360)|
+1,16,8,10,4,0,0,22,0,0,0,-1--1--1,,1|(1120,360)|
+12,17,48,140,150,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+11,18,0,290,150,6,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,19,abgelehnte Bestellungen,290,174,60,14,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,20,Verlorene Bestellungen,460,150,62,30,3,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,21,18,20,4,0,0,22,0,0,0,-1--1--1,,1|(390,150)|
+1,22,18,17,100,0,0,22,0,0,0,-1--1--1,,1|(210,150)|
+10,23,Nachfrage,120,260,55,20,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,24,Nachfrage Basis,60,180,55,20,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,25,Nachfrage Stosszeit,60,330,55,20,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,26,Ablehnungsanteil,290,60,55,20,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,27,Schwelle Durchlaufzeit,140,40,55,20,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,28,Toleranzband,440,40,55,20,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,29,wahrgenommene Durchlaufzeit,650,60,55,20,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,30,Erwartete Durchlaufzeit,900,120,55,20,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,31,Wahrnehmungsverzögerung,650,0,55,20,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,32,Minuten je Stunde,1100,60,55,20,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,33,Vorbereitungszeit,560,500,55,20,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,34,Personalkapazität,700,520,55,20,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,35,Personal im Einsatz,620,620,55,20,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,36,Leistung pro Person,780,640,55,20,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,37,freie Ofenplätze,820,480,55,20,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,38,Ofenplätze,960,560,55,20,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,39,Backzeit,1060,470,55,20,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,40,Ofenkapazität,1060,620,55,20,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,41,Kapazität der Küche,1200,620,55,20,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,42,Auslastung Personal,860,720,55,20,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,43,Auslastung Ofen,1060,720,55,20,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,201,24,23,0,0,43,0,0,64,0,-1--1--1,,1|(0,0)|
+1,202,25,23,0,0,43,0,0,64,0,-1--1--1,,1|(0,0)|
+1,203,23,3,1,0,43,0,0,64,0,-1--1--1,,1|(200,300)|
+1,204,23,19,1,0,43,0,0,64,0,-1--1--1,,1|(190,190)|
+1,205,19,3,1,0,45,0,0,64,0,-1--1--1,,1|(330,250)|
+1,206,26,19,0,0,43,0,0,64,0,-1--1--1,,1|(0,0)|
+1,207,27,26,0,0,45,0,0,64,0,-1--1--1,,1|(0,0)|
+1,208,28,26,0,0,45,0,0,64,0,-1--1--1,,1|(0,0)|
+1,209,29,26,0,0,43,0,0,64,0,-1--1--1,,1|(0,0)|
+1,210,30,29,0,0,43,0,0,192,0,-1--1--1,,1|(0,0)|
+1,211,31,29,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,214,39,30,0,0,43,0,0,64,0,-1--1--1,,1|(0,0)|
+1,215,33,30,1,0,43,0,0,64,0,-1--1--1,,1|(520,240)|
+1,216,32,30,0,0,43,0,0,64,0,-1--1--1,,1|(0,0)|
+1,217,4,6,1,0,43,0,0,64,0,-1--1--1,,1|(560,430)|
+1,218,33,6,0,0,45,0,0,64,0,-1--1--1,,1|(0,0)|
+1,219,34,6,0,0,43,0,0,64,0,-1--1--1,,1|(0,0)|
+1,220,37,6,0,0,43,0,0,64,0,-1--1--1,,1|(0,0)|
+1,221,35,34,0,0,43,0,0,64,0,-1--1--1,,1|(0,0)|
+1,222,36,34,0,0,43,0,0,64,0,-1--1--1,,1|(0,0)|
+1,223,36,33,0,0,45,0,0,64,0,-1--1--1,,1|(0,0)|
+1,224,38,37,0,0,43,0,0,64,0,-1--1--1,,1|(0,0)|
+1,225,7,37,0,0,45,0,0,64,0,-1--1--1,,1|(0,0)|
+1,226,7,9,1,0,43,0,0,192,0,-1--1--1,,1|(950,440)|
+1,227,39,9,0,0,45,0,0,64,0,-1--1--1,,1|(0,0)|
+1,228,38,40,0,0,43,0,0,64,0,-1--1--1,,1|(0,0)|
+1,229,39,40,0,0,45,0,0,64,0,-1--1--1,,1|(0,0)|
+1,230,40,41,0,0,43,0,0,64,0,-1--1--1,,1|(0,0)|
+1,231,34,41,0,0,43,0,0,64,0,-1--1--1,,1|(0,0)|
+1,232,6,42,0,0,43,0,0,64,0,-1--1--1,,1|(0,0)|
+1,233,34,42,0,0,45,0,0,64,0,-1--1--1,,1|(0,0)|
+1,234,7,43,0,0,43,0,0,64,0,-1--1--1,,1|(0,0)|
+1,235,38,43,0,0,45,0,0,64,0,-1--1--1,,1|(0,0)|
+12,90,0,470,250,16,16,5,4,0,0,-1,0,0,0,0,0,0,0,0,0
+B1
+12,91,0,470,280,45,8,8,135,0,8,-1,0,0,0,-1--1--1,0-0-0,|10|B|0-0-0,0,0,0,0,0,0
+Bestellstopp
+12,92,0,950,430,14,14,5,4,0,0,-1,0,0,0,0,0,0,0,0,0
+B2
+12,93,0,950,455,45,8,8,135,0,8,-1,0,0,0,-1--1--1,0-0-0,|10|B|0-0-0,0,0,0,0,0,0
+Backen
+12,94,0,650,440,14,14,5,4,0,0,-1,0,0,0,0,0,0,0,0,0
+B3
+12,95,0,650,465,45,8,8,135,0,8,-1,0,0,0,-1--1--1,0-0-0,|10|B|0-0-0,0,0,0,0,0,0
+Abarbeiten
+12,96,0,640,-40,360,14,8,135,0,8,-1,0,0,0,-1--1--1,0-0-0,|16|B|0-0-0,0,0,0,0,0,0
+Pizzeria Da Luigi: Stock-Flow-Diagramm v7 (Bestellstopp, Engpass, Verzoegerungen)
+10,44,Wartezeit in Schlange,780,220,55,20,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,301,4,44,0,0,43,0,0,64,0,-1--1--1,,1|(0,0)|
+1,302,6,44,0,0,45,0,0,64,0,-1--1--1,,1|(0,0)|
+1,303,44,30,0,0,43,0,0,64,0,-1--1--1,,1|(0,0)|
+1,304,9,6,1,0,43,0,0,64,0,-1--1--1,,1|(850,280)|
+///---\\\
+:L<%^E!@
+1:current.vdfx
+4:Time
+5:Offene Bestellungen
+9:current
+19:90,0
+24:0
+25:6
+26:6
+23:0
+15:0,0,0,0,0,0
+27:0,
+34:0,
+42:0
+72:0
+73:0
+95:0
+96:0
+97:0
+77:0
+78:0
+102:1
+93:0
+94:0
+92:0
+91:0
+90:0
+87:0
+75:
+43:
+103:8,8,8,3,8
+105:0,0,0,0,0,0,0,0,0,0
+104:Vensim Sans|12||0-0-0|0-0-0|-1--1--1|0-0-255|192-192-192|-1--1--1

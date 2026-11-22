@@ -1,0 +1,289 @@
+﻿datum;wochentag;stunde;quelle_kanal;bestellungen_angenommen;bestellungen_abgelehnt_app;pizzen;wetter_prognose_do;wetter_ist;temperatur_ist_c;event
+2026-09-19;Sa;11:00;Kasse (vor Ort + Telefon);3;;5;;sonnig;24;
+2026-09-19;Sa;11:00;App;2;0;5;;sonnig;24;
+2026-09-19;Sa;12:00;Kasse (vor Ort + Telefon);8;;12;;sonnig;24;
+2026-09-19;Sa;12:00;App;3;0;5;;sonnig;24;
+2026-09-19;Sa;13:00;Kasse (vor Ort + Telefon);7;;14;;sonnig;24;
+2026-09-19;Sa;13:00;App;3;0;3;;sonnig;24;
+2026-09-19;Sa;14:00;Kasse (vor Ort + Telefon);2;;5;;sonnig;24;
+2026-09-19;Sa;14:00;App;1;0;2;;sonnig;24;
+2026-09-19;Sa;15:00;Kasse (vor Ort + Telefon);1;;2;;sonnig;24;
+2026-09-19;Sa;15:00;App;1;0;1;;sonnig;24;
+2026-09-19;Sa;16:00;Kasse (vor Ort + Telefon);3;;5;;sonnig;24;
+2026-09-19;Sa;16:00;App;1;0;1;;sonnig;24;
+2026-09-19;Sa;17:00;Kasse (vor Ort + Telefon);5;;12;;sonnig;24;
+2026-09-19;Sa;17:00;App;2;0;5;;sonnig;24;
+2026-09-19;Sa;18:00;Kasse (vor Ort + Telefon);11;;22;;sonnig;24;
+2026-09-19;Sa;18:00;App;6;0;11;;sonnig;24;
+2026-09-19;Sa;19:00;Kasse (vor Ort + Telefon);14;;36;;sonnig;24;
+2026-09-19;Sa;19:00;App;4;3;9;;sonnig;24;
+2026-09-19;Sa;20:00;Kasse (vor Ort + Telefon);13;;29;;sonnig;24;
+2026-09-19;Sa;20:00;App;5;0;9;;sonnig;24;
+2026-09-19;Sa;21:00;Kasse (vor Ort + Telefon);6;;14;;sonnig;24;
+2026-09-19;Sa;21:00;App;2;0;4;;sonnig;24;
+2026-09-19;Sa;22:00;Kasse (vor Ort + Telefon);3;;7;;sonnig;24;
+2026-09-19;Sa;22:00;App;1;0;2;;sonnig;24;
+2026-09-20;So;11:00;Kasse (vor Ort + Telefon);3;;3;;bewölkt;21;
+2026-09-20;So;11:00;App;1;0;1;;bewölkt;21;
+2026-09-20;So;12:00;Kasse (vor Ort + Telefon);7;;12;;bewölkt;21;
+2026-09-20;So;12:00;App;3;0;6;;bewölkt;21;
+2026-09-20;So;13:00;Kasse (vor Ort + Telefon);6;;18;;bewölkt;21;
+2026-09-20;So;13:00;App;2;0;8;;bewölkt;21;
+2026-09-20;So;14:00;Kasse (vor Ort + Telefon);2;;4;;bewölkt;21;
+2026-09-20;So;14:00;App;1;0;1;;bewölkt;21;
+2026-09-20;So;15:00;Kasse (vor Ort + Telefon);1;;1;;bewölkt;21;
+2026-09-20;So;15:00;App;1;0;2;;bewölkt;21;
+2026-09-20;So;16:00;Kasse (vor Ort + Telefon);1;;1;;bewölkt;21;
+2026-09-20;So;16:00;App;1;0;2;;bewölkt;21;
+2026-09-20;So;17:00;Kasse (vor Ort + Telefon);4;;8;;bewölkt;21;
+2026-09-20;So;17:00;App;2;0;3;;bewölkt;21;
+2026-09-20;So;18:00;Kasse (vor Ort + Telefon);10;;21;;bewölkt;21;
+2026-09-20;So;18:00;App;6;0;10;;bewölkt;21;
+2026-09-20;So;19:00;Kasse (vor Ort + Telefon);12;;20;;bewölkt;21;
+2026-09-20;So;19:00;App;9;0;25;;bewölkt;21;
+2026-09-20;So;20:00;Kasse (vor Ort + Telefon);10;;24;;bewölkt;21;
+2026-09-20;So;20:00;App;6;0;18;;bewölkt;21;
+2026-09-20;So;21:00;Kasse (vor Ort + Telefon);4;;9;;bewölkt;21;
+2026-09-20;So;21:00;App;3;0;8;;bewölkt;21;
+2026-09-20;So;22:00;Kasse (vor Ort + Telefon);2;;4;;bewölkt;21;
+2026-09-20;So;22:00;App;1;0;3;;bewölkt;21;
+2026-09-26;Sa;11:00;Kasse (vor Ort + Telefon);3;;4;;Regen;14;
+2026-09-26;Sa;11:00;App;2;0;3;;Regen;14;
+2026-09-26;Sa;12:00;Kasse (vor Ort + Telefon);8;;19;;Regen;14;
+2026-09-26;Sa;12:00;App;5;0;13;;Regen;14;
+2026-09-26;Sa;13:00;Kasse (vor Ort + Telefon);6;;12;;Regen;14;
+2026-09-26;Sa;13:00;App;4;0;9;;Regen;14;
+2026-09-26;Sa;14:00;Kasse (vor Ort + Telefon);2;;4;;Regen;14;
+2026-09-26;Sa;14:00;App;2;0;3;;Regen;14;
+2026-09-26;Sa;15:00;Kasse (vor Ort + Telefon);1;;2;;Regen;14;
+2026-09-26;Sa;15:00;App;1;0;2;;Regen;14;
+2026-09-26;Sa;16:00;Kasse (vor Ort + Telefon);2;;5;;Regen;14;
+2026-09-26;Sa;16:00;App;2;0;5;;Regen;14;
+2026-09-26;Sa;17:00;Kasse (vor Ort + Telefon);6;;14;;Regen;14;
+2026-09-26;Sa;17:00;App;3;0;5;;Regen;14;
+2026-09-26;Sa;18:00;Kasse (vor Ort + Telefon);10;;21;;Regen;14;
+2026-09-26;Sa;18:00;App;10;0;23;;Regen;14;
+2026-09-26;Sa;19:00;Kasse (vor Ort + Telefon);12;;23;;Regen;14;
+2026-09-26;Sa;19:00;App;9;0;22;;Regen;14;
+2026-09-26;Sa;20:00;Kasse (vor Ort + Telefon);11;;22;;Regen;14;
+2026-09-26;Sa;20:00;App;10;0;22;;Regen;14;
+2026-09-26;Sa;21:00;Kasse (vor Ort + Telefon);6;;11;;Regen;14;
+2026-09-26;Sa;21:00;App;4;0;7;;Regen;14;
+2026-09-26;Sa;22:00;Kasse (vor Ort + Telefon);2;;5;;Regen;14;
+2026-09-26;Sa;22:00;App;2;0;5;;Regen;14;
+2026-09-27;So;11:00;Kasse (vor Ort + Telefon);3;;4;;Regen;13;
+2026-09-27;So;11:00;App;2;0;3;;Regen;13;
+2026-09-27;So;12:00;Kasse (vor Ort + Telefon);7;;15;;Regen;13;
+2026-09-27;So;12:00;App;5;0;11;;Regen;13;
+2026-09-27;So;13:00;Kasse (vor Ort + Telefon);5;;9;;Regen;13;
+2026-09-27;So;13:00;App;4;0;8;;Regen;13;
+2026-09-27;So;14:00;Kasse (vor Ort + Telefon);2;;2;;Regen;13;
+2026-09-27;So;14:00;App;2;0;5;;Regen;13;
+2026-09-27;So;15:00;Kasse (vor Ort + Telefon);1;;2;;Regen;13;
+2026-09-27;So;15:00;App;1;0;4;;Regen;13;
+2026-09-27;So;16:00;Kasse (vor Ort + Telefon);2;;6;;Regen;13;
+2026-09-27;So;16:00;App;1;0;3;;Regen;13;
+2026-09-27;So;17:00;Kasse (vor Ort + Telefon);4;;9;;Regen;13;
+2026-09-27;So;17:00;App;3;0;5;;Regen;13;
+2026-09-27;So;18:00;Kasse (vor Ort + Telefon);8;;14;;Regen;13;
+2026-09-27;So;18:00;App;9;0;18;;Regen;13;
+2026-09-27;So;19:00;Kasse (vor Ort + Telefon);15;;25;;Regen;13;
+2026-09-27;So;19:00;App;9;0;20;;Regen;13;
+2026-09-27;So;20:00;Kasse (vor Ort + Telefon);9;;20;;Regen;13;
+2026-09-27;So;20:00;App;7;0;18;;Regen;13;
+2026-09-27;So;21:00;Kasse (vor Ort + Telefon);5;;7;;Regen;13;
+2026-09-27;So;21:00;App;4;0;10;;Regen;13;
+2026-09-27;So;22:00;Kasse (vor Ort + Telefon);2;;3;;Regen;13;
+2026-09-27;So;22:00;App;1;0;3;;Regen;13;
+2026-10-03;Sa;11:00;Kasse (vor Ort + Telefon);4;;10;;bewölkt;17;Dorffest
+2026-10-03;Sa;11:00;App;2;0;5;;bewölkt;17;Dorffest
+2026-10-03;Sa;12:00;Kasse (vor Ort + Telefon);8;;12;;bewölkt;17;Dorffest
+2026-10-03;Sa;12:00;App;4;0;8;;bewölkt;17;Dorffest
+2026-10-03;Sa;13:00;Kasse (vor Ort + Telefon);7;;12;;bewölkt;17;Dorffest
+2026-10-03;Sa;13:00;App;3;0;6;;bewölkt;17;Dorffest
+2026-10-03;Sa;14:00;Kasse (vor Ort + Telefon);2;;6;;bewölkt;17;Dorffest
+2026-10-03;Sa;14:00;App;1;0;2;;bewölkt;17;Dorffest
+2026-10-03;Sa;15:00;Kasse (vor Ort + Telefon);1;;2;;bewölkt;17;Dorffest
+2026-10-03;Sa;15:00;App;1;0;1;;bewölkt;17;Dorffest
+2026-10-03;Sa;16:00;Kasse (vor Ort + Telefon);3;;7;;bewölkt;17;Dorffest
+2026-10-03;Sa;16:00;App;1;0;3;;bewölkt;17;Dorffest
+2026-10-03;Sa;17:00;Kasse (vor Ort + Telefon);5;;12;;bewölkt;17;Dorffest
+2026-10-03;Sa;17:00;App;3;0;6;;bewölkt;17;Dorffest
+2026-10-03;Sa;18:00;Kasse (vor Ort + Telefon);11;;28;;bewölkt;17;Dorffest
+2026-10-03;Sa;18:00;App;5;1;16;;bewölkt;17;Dorffest
+2026-10-03;Sa;19:00;Kasse (vor Ort + Telefon);14;;26;;bewölkt;17;Dorffest
+2026-10-03;Sa;19:00;App;9;0;19;;bewölkt;17;Dorffest
+2026-10-03;Sa;20:00;Kasse (vor Ort + Telefon);13;;32;;bewölkt;17;Dorffest
+2026-10-03;Sa;20:00;App;6;0;13;;bewölkt;17;Dorffest
+2026-10-03;Sa;21:00;Kasse (vor Ort + Telefon);7;;9;;bewölkt;17;Dorffest
+2026-10-03;Sa;21:00;App;3;0;8;;bewölkt;17;Dorffest
+2026-10-03;Sa;22:00;Kasse (vor Ort + Telefon);3;;7;;bewölkt;17;Dorffest
+2026-10-03;Sa;22:00;App;1;0;1;;bewölkt;17;Dorffest
+2026-10-04;So;11:00;Kasse (vor Ort + Telefon);3;;6;;sonnig;19;
+2026-10-04;So;11:00;App;1;0;2;;sonnig;19;
+2026-10-04;So;12:00;Kasse (vor Ort + Telefon);8;;13;;sonnig;19;
+2026-10-04;So;12:00;App;3;0;7;;sonnig;19;
+2026-10-04;So;13:00;Kasse (vor Ort + Telefon);6;;8;;sonnig;19;
+2026-10-04;So;13:00;App;2;0;4;;sonnig;19;
+2026-10-04;So;14:00;Kasse (vor Ort + Telefon);2;;4;;sonnig;19;
+2026-10-04;So;14:00;App;1;0;3;;sonnig;19;
+2026-10-04;So;15:00;Kasse (vor Ort + Telefon);1;;2;;sonnig;19;
+2026-10-04;So;15:00;App;1;0;1;;sonnig;19;
+2026-10-04;So;16:00;Kasse (vor Ort + Telefon);1;;2;;sonnig;19;
+2026-10-04;So;16:00;App;1;0;3;;sonnig;19;
+2026-10-04;So;17:00;Kasse (vor Ort + Telefon);4;;9;;sonnig;19;
+2026-10-04;So;17:00;App;2;0;6;;sonnig;19;
+2026-10-04;So;18:00;Kasse (vor Ort + Telefon);10;;22;;sonnig;19;
+2026-10-04;So;18:00;App;4;0;9;;sonnig;19;
+2026-10-04;So;19:00;Kasse (vor Ort + Telefon);14;;28;;sonnig;19;
+2026-10-04;So;19:00;App;6;0;17;;sonnig;19;
+2026-10-04;So;20:00;Kasse (vor Ort + Telefon);9;;20;;sonnig;19;
+2026-10-04;So;20:00;App;5;0;8;;sonnig;19;
+2026-10-04;So;21:00;Kasse (vor Ort + Telefon);4;;11;;sonnig;19;
+2026-10-04;So;21:00;App;2;0;4;;sonnig;19;
+2026-10-04;So;22:00;Kasse (vor Ort + Telefon);1;;1;;sonnig;19;
+2026-10-04;So;22:00;App;1;0;1;;sonnig;19;
+2026-10-10;Sa;11:00;Kasse (vor Ort + Telefon);3;;8;;bewölkt;12;
+2026-10-10;Sa;11:00;App;2;0;4;;bewölkt;12;
+2026-10-10;Sa;12:00;Kasse (vor Ort + Telefon);7;;9;;bewölkt;12;
+2026-10-10;Sa;12:00;App;4;0;6;;bewölkt;12;
+2026-10-10;Sa;13:00;Kasse (vor Ort + Telefon);7;;16;;bewölkt;12;
+2026-10-10;Sa;13:00;App;3;0;5;;bewölkt;12;
+2026-10-10;Sa;14:00;Kasse (vor Ort + Telefon);2;;6;;bewölkt;12;
+2026-10-10;Sa;14:00;App;1;0;2;;bewölkt;12;
+2026-10-10;Sa;15:00;Kasse (vor Ort + Telefon);1;;1;;bewölkt;12;
+2026-10-10;Sa;15:00;App;1;0;1;;bewölkt;12;
+2026-10-10;Sa;16:00;Kasse (vor Ort + Telefon);2;;3;;bewölkt;12;
+2026-10-10;Sa;16:00;App;1;0;4;;bewölkt;12;
+2026-10-10;Sa;17:00;Kasse (vor Ort + Telefon);4;;11;;bewölkt;12;
+2026-10-10;Sa;17:00;App;3;0;6;;bewölkt;12;
+2026-10-10;Sa;18:00;Kasse (vor Ort + Telefon);13;;32;;bewölkt;12;
+2026-10-10;Sa;18:00;App;5;0;13;;bewölkt;12;
+2026-10-10;Sa;19:00;Kasse (vor Ort + Telefon);15;;26;;bewölkt;12;
+2026-10-10;Sa;19:00;App;9;0;19;;bewölkt;12;
+2026-10-10;Sa;20:00;Kasse (vor Ort + Telefon);13;;24;;bewölkt;12;
+2026-10-10;Sa;20:00;App;7;0;11;;bewölkt;12;
+2026-10-10;Sa;21:00;Kasse (vor Ort + Telefon);5;;10;;bewölkt;12;
+2026-10-10;Sa;21:00;App;3;0;7;;bewölkt;12;
+2026-10-10;Sa;22:00;Kasse (vor Ort + Telefon);2;;4;;bewölkt;12;
+2026-10-10;Sa;22:00;App;1;0;3;;bewölkt;12;
+2026-10-11;So;11:00;Kasse (vor Ort + Telefon);3;;9;;Regen;11;
+2026-10-11;So;11:00;App;2;0;3;;Regen;11;
+2026-10-11;So;12:00;Kasse (vor Ort + Telefon);8;;14;;Regen;11;
+2026-10-11;So;12:00;App;6;0;10;;Regen;11;
+2026-10-11;So;13:00;Kasse (vor Ort + Telefon);5;;9;;Regen;11;
+2026-10-11;So;13:00;App;3;0;4;;Regen;11;
+2026-10-11;So;14:00;Kasse (vor Ort + Telefon);2;;3;;Regen;11;
+2026-10-11;So;14:00;App;1;0;2;;Regen;11;
+2026-10-11;So;15:00;Kasse (vor Ort + Telefon);2;;5;;Regen;11;
+2026-10-11;So;15:00;App;1;0;3;;Regen;11;
+2026-10-11;So;16:00;Kasse (vor Ort + Telefon);2;;4;;Regen;11;
+2026-10-11;So;16:00;App;1;0;2;;Regen;11;
+2026-10-11;So;17:00;Kasse (vor Ort + Telefon);5;;8;;Regen;11;
+2026-10-11;So;17:00;App;3;0;5;;Regen;11;
+2026-10-11;So;18:00;Kasse (vor Ort + Telefon);10;;28;;Regen;11;
+2026-10-11;So;18:00;App;6;0;12;;Regen;11;
+2026-10-11;So;19:00;Kasse (vor Ort + Telefon);14;;31;;Regen;11;
+2026-10-11;So;19:00;App;8;0;14;;Regen;11;
+2026-10-11;So;20:00;Kasse (vor Ort + Telefon);11;;28;;Regen;11;
+2026-10-11;So;20:00;App;8;0;16;;Regen;11;
+2026-10-11;So;21:00;Kasse (vor Ort + Telefon);5;;7;;Regen;11;
+2026-10-11;So;21:00;App;3;0;9;;Regen;11;
+2026-10-11;So;22:00;Kasse (vor Ort + Telefon);2;;6;;Regen;11;
+2026-10-11;So;22:00;App;1;0;2;;Regen;11;
+2026-10-17;Sa;11:00;Kasse (vor Ort + Telefon);3;;4;;sonnig;16;
+2026-10-17;Sa;11:00;App;2;0;3;;sonnig;16;
+2026-10-17;Sa;12:00;Kasse (vor Ort + Telefon);8;;14;;sonnig;16;
+2026-10-17;Sa;12:00;App;3;0;3;;sonnig;16;
+2026-10-17;Sa;13:00;Kasse (vor Ort + Telefon);6;;14;;sonnig;16;
+2026-10-17;Sa;13:00;App;3;0;6;;sonnig;16;
+2026-10-17;Sa;14:00;Kasse (vor Ort + Telefon);2;;6;;sonnig;16;
+2026-10-17;Sa;14:00;App;1;0;2;;sonnig;16;
+2026-10-17;Sa;15:00;Kasse (vor Ort + Telefon);1;;2;;sonnig;16;
+2026-10-17;Sa;15:00;App;1;0;1;;sonnig;16;
+2026-10-17;Sa;16:00;Kasse (vor Ort + Telefon);1;;2;;sonnig;16;
+2026-10-17;Sa;16:00;App;1;0;2;;sonnig;16;
+2026-10-17;Sa;17:00;Kasse (vor Ort + Telefon);5;;7;;sonnig;16;
+2026-10-17;Sa;17:00;App;3;0;8;;sonnig;16;
+2026-10-17;Sa;18:00;Kasse (vor Ort + Telefon);10;;21;;sonnig;16;
+2026-10-17;Sa;18:00;App;5;0;10;;sonnig;16;
+2026-10-17;Sa;19:00;Kasse (vor Ort + Telefon);17;;37;;sonnig;16;
+2026-10-17;Sa;19:00;App;6;0;8;;sonnig;16;
+2026-10-17;Sa;20:00;Kasse (vor Ort + Telefon);11;;19;;sonnig;16;
+2026-10-17;Sa;20:00;App;6;0;12;;sonnig;16;
+2026-10-17;Sa;21:00;Kasse (vor Ort + Telefon);5;;10;;sonnig;16;
+2026-10-17;Sa;21:00;App;2;0;5;;sonnig;16;
+2026-10-17;Sa;22:00;Kasse (vor Ort + Telefon);2;;6;;sonnig;16;
+2026-10-17;Sa;22:00;App;1;0;2;;sonnig;16;
+2026-10-18;So;11:00;Kasse (vor Ort + Telefon);3;;7;;bewölkt;14;Fussball-Final (TV)
+2026-10-18;So;11:00;App;2;0;5;;bewölkt;14;Fussball-Final (TV)
+2026-10-18;So;12:00;Kasse (vor Ort + Telefon);7;;12;;bewölkt;14;Fussball-Final (TV)
+2026-10-18;So;12:00;App;4;0;9;;bewölkt;14;Fussball-Final (TV)
+2026-10-18;So;13:00;Kasse (vor Ort + Telefon);4;;9;;bewölkt;14;Fussball-Final (TV)
+2026-10-18;So;13:00;App;3;0;7;;bewölkt;14;Fussball-Final (TV)
+2026-10-18;So;14:00;Kasse (vor Ort + Telefon);1;;2;;bewölkt;14;Fussball-Final (TV)
+2026-10-18;So;14:00;App;1;0;1;;bewölkt;14;Fussball-Final (TV)
+2026-10-18;So;15:00;Kasse (vor Ort + Telefon);1;;4;;bewölkt;14;Fussball-Final (TV)
+2026-10-18;So;15:00;App;1;0;4;;bewölkt;14;Fussball-Final (TV)
+2026-10-18;So;16:00;Kasse (vor Ort + Telefon);1;;1;;bewölkt;14;Fussball-Final (TV)
+2026-10-18;So;16:00;App;1;0;2;;bewölkt;14;Fussball-Final (TV)
+2026-10-18;So;17:00;Kasse (vor Ort + Telefon);5;;13;;bewölkt;14;Fussball-Final (TV)
+2026-10-18;So;17:00;App;3;0;9;;bewölkt;14;Fussball-Final (TV)
+2026-10-18;So;18:00;Kasse (vor Ort + Telefon);11;;26;;bewölkt;14;Fussball-Final (TV)
+2026-10-18;So;18:00;App;6;0;10;;bewölkt;14;Fussball-Final (TV)
+2026-10-18;So;19:00;Kasse (vor Ort + Telefon);11;;27;;bewölkt;14;Fussball-Final (TV)
+2026-10-18;So;19:00;App;6;5;18;;bewölkt;14;Fussball-Final (TV)
+2026-10-18;So;20:00;Kasse (vor Ort + Telefon);10;;22;;bewölkt;14;Fussball-Final (TV)
+2026-10-18;So;20:00;App;8;0;17;;bewölkt;14;Fussball-Final (TV)
+2026-10-18;So;21:00;Kasse (vor Ort + Telefon);5;;11;;bewölkt;14;Fussball-Final (TV)
+2026-10-18;So;21:00;App;3;0;5;;bewölkt;14;Fussball-Final (TV)
+2026-10-18;So;22:00;Kasse (vor Ort + Telefon);2;;8;;bewölkt;14;Fussball-Final (TV)
+2026-10-18;So;22:00;App;1;0;2;;bewölkt;14;Fussball-Final (TV)
+2026-10-24;Sa;11:00;Kasse (vor Ort + Telefon);3;;6;;Regen;9;
+2026-10-24;Sa;11:00;App;3;0;10;;Regen;9;
+2026-10-24;Sa;12:00;Kasse (vor Ort + Telefon);8;;18;;Regen;9;
+2026-10-24;Sa;12:00;App;6;0;13;;Regen;9;
+2026-10-24;Sa;13:00;Kasse (vor Ort + Telefon);5;;10;;Regen;9;
+2026-10-24;Sa;13:00;App;4;0;7;;Regen;9;
+2026-10-24;Sa;14:00;Kasse (vor Ort + Telefon);2;;3;;Regen;9;
+2026-10-24;Sa;14:00;App;1;0;1;;Regen;9;
+2026-10-24;Sa;15:00;Kasse (vor Ort + Telefon);1;;2;;Regen;9;
+2026-10-24;Sa;15:00;App;1;0;4;;Regen;9;
+2026-10-24;Sa;16:00;Kasse (vor Ort + Telefon);2;;3;;Regen;9;
+2026-10-24;Sa;16:00;App;1;0;2;;Regen;9;
+2026-10-24;Sa;17:00;Kasse (vor Ort + Telefon);5;;12;;Regen;9;
+2026-10-24;Sa;17:00;App;3;0;9;;Regen;9;
+2026-10-24;Sa;18:00;Kasse (vor Ort + Telefon);11;;27;;Regen;9;
+2026-10-24;Sa;18:00;App;7;0;14;;Regen;9;
+2026-10-24;Sa;19:00;Kasse (vor Ort + Telefon);16;;29;;Regen;9;
+2026-10-24;Sa;19:00;App;11;0;16;;Regen;9;
+2026-10-24;Sa;20:00;Kasse (vor Ort + Telefon);11;;26;;Regen;9;
+2026-10-24;Sa;20:00;App;7;0;13;;Regen;9;
+2026-10-24;Sa;21:00;Kasse (vor Ort + Telefon);5;;11;;Regen;9;
+2026-10-24;Sa;21:00;App;3;0;8;;Regen;9;
+2026-10-24;Sa;22:00;Kasse (vor Ort + Telefon);2;;3;;Regen;9;
+2026-10-24;Sa;22:00;App;2;0;2;;Regen;9;
+2026-10-25;So;11:00;Kasse (vor Ort + Telefon);3;;7;;bewölkt;10;
+2026-10-25;So;11:00;App;1;0;1;;bewölkt;10;
+2026-10-25;So;12:00;Kasse (vor Ort + Telefon);6;;14;;bewölkt;10;
+2026-10-25;So;12:00;App;3;0;5;;bewölkt;10;
+2026-10-25;So;13:00;Kasse (vor Ort + Telefon);6;;14;;bewölkt;10;
+2026-10-25;So;13:00;App;2;0;4;;bewölkt;10;
+2026-10-25;So;14:00;Kasse (vor Ort + Telefon);2;;4;;bewölkt;10;
+2026-10-25;So;14:00;App;1;0;4;;bewölkt;10;
+2026-10-25;So;15:00;Kasse (vor Ort + Telefon);1;;3;;bewölkt;10;
+2026-10-25;So;15:00;App;1;0;1;;bewölkt;10;
+2026-10-25;So;16:00;Kasse (vor Ort + Telefon);2;;6;;bewölkt;10;
+2026-10-25;So;16:00;App;1;0;2;;bewölkt;10;
+2026-10-25;So;17:00;Kasse (vor Ort + Telefon);6;;12;;bewölkt;10;
+2026-10-25;So;17:00;App;3;0;8;;bewölkt;10;
+2026-10-25;So;18:00;Kasse (vor Ort + Telefon);10;;16;;bewölkt;10;
+2026-10-25;So;18:00;App;6;0;10;;bewölkt;10;
+2026-10-25;So;19:00;Kasse (vor Ort + Telefon);10;;26;;bewölkt;10;
+2026-10-25;So;19:00;App;9;0;19;;bewölkt;10;
+2026-10-25;So;20:00;Kasse (vor Ort + Telefon);9;;17;;bewölkt;10;
+2026-10-25;So;20:00;App;4;0;8;;bewölkt;10;
+2026-10-25;So;21:00;Kasse (vor Ort + Telefon);4;;13;;bewölkt;10;
+2026-10-25;So;21:00;App;2;0;8;;bewölkt;10;
+2026-10-25;So;22:00;Kasse (vor Ort + Telefon);2;;5;;bewölkt;10;
+2026-10-25;So;22:00;App;1;0;3;;bewölkt;10;
